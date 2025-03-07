@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized News Aggregator</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Personalized News Aggregator</h1>
+    </header>
+
+    <div class="filter">
+        <label for="category">Filter by Category:</label>
+        <select id="category" onchange="window.location.href='?category=' + this.value;">
+            <option value="All" {% if selected_category=='All' %}selected{% endif %}>All</option>
+            {% for category in categories %}
+            <option value="{{ category }}" {% if selected_category==category %}selected{% endif %}>{{ category }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="news-container">
+        {% for article in news %}
+        <div class="news-card">
+            <h2>{{ article['Title'] }}</h2>
+            <p>{{ article['Summary'] }}</p>
+            <p><strong>Published on:</strong> {{ article['Publication Date'] }}</p>
+            <p><strong>Source:</strong> {{ article['Source'] }}</p>
+            <a href="{{ article['URL'] }}" target="_blank">Read more</a>
+        </div>
+        {% endfor %}
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Personalized News Aggregator. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
